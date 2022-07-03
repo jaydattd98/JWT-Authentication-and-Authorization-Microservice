@@ -6,17 +6,17 @@ About Project :-
 
 Using this Application its very easy to use. We can add new users easily and valided them on runtime.
 
-1.Created Microservice for Authorization and Authentication purpose
+1) Created Microservice for Authorization and Authentication purpose
 
-2.Every request in any other Microservice will Authenticate by Jwt Authorization Microservice.
+2) Every request in any other Microservice will Authenticate by Jwt Authorization Microservice.
 
-3.You just need to clone this repository
+3) You just need to clone this repository
 
-4.Use the follwing API to get simple JWT token in respose.
+4) Use the follwing API to get simple JWT token in respose.
 
-5.Once you get token, Store it in session either client side and backend side as you want.
+5) Once you get token, Store it in session either client side and backend side as you want.
 
-6.Whenever you want to validate user just need to hit following API.(Get 401 not Authorized/200 ok for authorized)
+6) Whenever you want to validate user just need to hit following API.(Get 401 not Authorized/200 ok for authorized)
 
 
 Database Access points:
