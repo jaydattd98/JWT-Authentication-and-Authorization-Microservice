@@ -19,13 +19,13 @@ Using this Application its very easy to use. We can add new users easily and val
 6) Whenever you want to validate user just need to hit following API (with Token in header).(Get 401 not Authorized/200 ok for authorized)
 
 
-Database Access points:
+Database Access points :
 
-Jwt Application Tables : http://localhost:8080/h2-console/
+       Jwt Application Tables : http://localhost:8080/h2-console/
 
-Local accces point for Backent
+Local accces point for Backend ;
 
-Authorization Microservice: http://localhost:8080/
+       Authorization Microservice: http://localhost:8080/
 
 Login Credentials:
 
