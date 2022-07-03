@@ -4,6 +4,7 @@ import com.cognizant.springboot.jwtauthentication.helper.JwtUtil;
 import com.cognizant.springboot.jwtauthentication.model.JwtRequest;
 import com.cognizant.springboot.jwtauthentication.model.JwtResponse;
 import com.cognizant.springboot.jwtauthentication.service.MyUserDetailsService;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +18,18 @@ import org.springframework.web.bind.annotation.*;
  * Class AuthenticationController
  * Used to provide the Auth service api
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @CrossOrigin
 @RestController
 @RequestMapping("/auth/v1")
+@AllArgsConstructor
 public class AuthenticationController {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(AuthenticationController.class);
 
-    @Autowired
     private MyUserDetailsService myUserDetailsService;
-    @Autowired
     private JwtUtil jwtUtil;
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     /**

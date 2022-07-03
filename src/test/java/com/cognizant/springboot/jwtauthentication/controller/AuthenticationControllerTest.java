@@ -31,6 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AuthenticationController.class)
 public class AuthenticationControllerTest {
 
+    public static final String Auth_URL_TEMPLATE = "/auth/v1";
+
     @Autowired
     private MockMvc mvc;
     @MockBean
@@ -62,7 +64,7 @@ public class AuthenticationControllerTest {
         //Action
         mvc
                 .perform(MockMvcRequestBuilders
-                        .post("/login")
+                        .post(Auth_URL_TEMPLATE+"/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(jwtRequest)))
                 .andExpect(status().isOk())
@@ -77,7 +79,7 @@ public class AuthenticationControllerTest {
         //Action
         mvc
                 .perform(MockMvcRequestBuilders
-                        .get("/isTokenValid"))
+                        .get(Auth_URL_TEMPLATE+"/isTokenValid"))
                 .andExpect(status().isOk());
     }
 }

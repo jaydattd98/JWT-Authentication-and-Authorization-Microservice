@@ -3,6 +3,7 @@ package com.cognizant.springboot.jwtauthentication.config;
 import com.cognizant.springboot.jwtauthentication.helper.JwtUtil;
 import com.cognizant.springboot.jwtauthentication.service.MyUserDetailsService;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,15 +23,14 @@ import java.io.IOException;
 /**
  * Class MyJwtAuthenticationFilter
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @Component
+@AllArgsConstructor
 public class MyJwtAuthenticationFilter extends OncePerRequestFilter {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(MyJwtAuthenticationFilter.class);
 
-    @Autowired
     private JwtUtil jwtTokenUtil;
-    @Autowired
     private MyUserDetailsService myUserDetailsService;
 
     /**

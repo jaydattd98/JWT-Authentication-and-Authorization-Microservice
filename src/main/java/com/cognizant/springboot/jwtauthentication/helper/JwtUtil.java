@@ -1,6 +1,7 @@
 package com.cognizant.springboot.jwtauthentication.helper;
 
 import io.jsonwebtoken.*;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,7 @@ import java.util.Date;
 /**
  * Class JwtUtil
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @Service
 public class JwtUtil {

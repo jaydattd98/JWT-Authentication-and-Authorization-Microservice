@@ -2,6 +2,7 @@ package com.cognizant.springboot.jwtauthentication.service;
 
 import com.cognizant.springboot.jwtauthentication.model.User;
 import com.cognizant.springboot.jwtauthentication.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,12 +18,12 @@ import java.util.ArrayList;
  * Used to provide Customer UserDetails service
  *
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @Service
+@AllArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
 
     @Override

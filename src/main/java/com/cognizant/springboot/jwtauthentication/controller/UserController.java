@@ -3,6 +3,7 @@ package com.cognizant.springboot.jwtauthentication.controller;
 import com.cognizant.springboot.jwtauthentication.model.User;
 import com.cognizant.springboot.jwtauthentication.repository.UserRepository;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,16 +14,16 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Class UserController
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @CrossOrigin
 @RestController
 @RequestMapping("/auth/v1")
+@AllArgsConstructor
 public class UserController {
 
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
     private UserRepository userRepository;
 
     /**

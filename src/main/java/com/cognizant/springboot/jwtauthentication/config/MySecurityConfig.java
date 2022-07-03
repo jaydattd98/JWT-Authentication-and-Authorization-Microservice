@@ -2,6 +2,7 @@ package com.cognizant.springboot.jwtauthentication.config;
 
 import com.cognizant.springboot.jwtauthentication.service.MyUserDetailsService;
 import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,16 +21,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  * Class MySecurityConfig
  *
- * @author 841771 jaydatt
+ * @author jaydatt
  */
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(MySecurityConfig.class);
 
-    @Autowired
     private MyUserDetailsService myUserDetailsService;
-    @Autowired
     private MyJwtAuthenticationFilter myJwtAuthenticationFilter;
 
     /**
