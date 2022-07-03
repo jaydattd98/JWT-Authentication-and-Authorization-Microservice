@@ -16,7 +16,7 @@ Using this Application its very easy to use. We can add new users easily and val
 
 5) Once you get token, Store it in session either client side and backend side as you want.
 
-6) Whenever you want to validate user just need to hit following API.(Get 401 not Authorized/200 ok for authorized)
+6) Whenever you want to validate user just need to hit following API (with Token in header).(Get 401 not Authorized/200 ok for authorized)
 
 
 Database Access points:
