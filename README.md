@@ -18,6 +18,15 @@ Using this Application its very easy to use. We can add new users easily and val
 
 6) Whenever you want to validate user just need to hit following API (with Token in header).(Get 401 not Authorized/200 ok for authorized)
 
+7) Also Added Open API(Swagger)
+
+8) This project comes with globle exception Handling(@RestControllerAdvice)
+
+Swagger UI Access Point :
+
+       http://localhost:8181/swagger-ui/index.html
+       
+       Using this url you will get all details Reagarding Request/Response and Schaemas used in project 
 
 Database Access points :
 
@@ -34,6 +43,9 @@ Login Credentials:
               Username : jaydatt 
 
               Password : jaydatt@123
+
+
+Just for Refrence :-
 
 APIS ;-
 
