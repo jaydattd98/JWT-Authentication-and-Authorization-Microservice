@@ -1,12 +1,13 @@
 package com.cognizant.springboot.jwtauthentication.controller;
 
+import com.cognizant.springboot.jwtauthentication.exception.AuthServiceException;
+import com.cognizant.springboot.jwtauthentication.exception.ErrorCode;
 import com.cognizant.springboot.jwtauthentication.model.User;
 import com.cognizant.springboot.jwtauthentication.repository.UserRepository;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,12 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author jaydatt
  */
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/auth/v1")
 @AllArgsConstructor
 public class UserController {
-
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(UserController.class);
 
     private UserRepository userRepository;
 
@@ -32,27 +32,21 @@ public class UserController {
      * @param user
      * @return ResponseEntity<User>
      */
-    @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        if (validateUserDetails(user)) {
-            try {
-                User userCreated = userRepository.save(user);
-                return new ResponseEntity<User>(user, HttpStatus.CREATED);
-            } catch (Exception e) {
-              log.error("Error creating User");
-              throw new InternalException("Error creating User");
-            }
-        }
-        return new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
+    @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<User> createUser(@RequestBody User user) throws AuthServiceException {
+        validateUserDetails(user);
+        return new ResponseEntity<User>(userRepository.save(user), HttpStatus.CREATED);
     }
 
     /**
-     *
      * @param user
-     * @return valid
+     * @return validR
      */
-    private boolean validateUserDetails(User user) {
-        return user != null && StringUtils.hasText(user.getUserName()) &&
-                StringUtils.hasText(user.getPassword()) && StringUtils.hasText(user.getPhoneNumber());
+    private void validateUserDetails(User user) throws AuthServiceException {
+        if (user == null || !StringUtils.hasText(user.getUserName()) || !StringUtils.hasText(user.getPassword())
+                || !StringUtils.hasText(user.getPhoneNumber())) {
+            log.error("Validation failed for Request input -> user =" + user.toString());
+            throw new AuthServiceException(ErrorCode.INVALID_INPUT);
+        }
     }
 }

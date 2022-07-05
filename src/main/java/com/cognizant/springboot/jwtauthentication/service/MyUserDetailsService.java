@@ -3,20 +3,17 @@ package com.cognizant.springboot.jwtauthentication.service;
 import com.cognizant.springboot.jwtauthentication.model.User;
 import com.cognizant.springboot.jwtauthentication.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 
 /**
  * Class MyUserDetailsService
- *
+ * <p>
  * Used to provide Customer UserDetails service
- *
  *
  * @author jaydatt
  */
@@ -28,16 +25,8 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        if (StringUtils.hasText(username)) {
-            User user = userRepository.findById(username).orElse(null);
-            if (user != null) {
-                return new org.springframework.security.core.userdetails
-                        .User(user.getUserName(), user.getPassword(), new ArrayList<>());
-            } else {
-                throw new UsernameNotFoundException("User not Found..!!");
-            }
-        }
-        return null;
+        User user = userRepository.findById(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return new org.springframework.security.core.userdetails
+                .User(user.getUserName(), user.getPassword(), new ArrayList<>());
     }
 }

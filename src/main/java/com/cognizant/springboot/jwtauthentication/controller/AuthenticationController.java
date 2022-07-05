@@ -1,14 +1,18 @@
 package com.cognizant.springboot.jwtauthentication.controller;
 
+import com.cognizant.springboot.jwtauthentication.exception.AuthServiceException;
+import com.cognizant.springboot.jwtauthentication.exception.ErrorCode;
 import com.cognizant.springboot.jwtauthentication.helper.JwtUtil;
 import com.cognizant.springboot.jwtauthentication.model.JwtRequest;
 import com.cognizant.springboot.jwtauthentication.model.JwtResponse;
 import com.cognizant.springboot.jwtauthentication.service.MyUserDetailsService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,13 +24,12 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author jaydatt
  */
+@Slf4j
 @CrossOrigin
 @RestController
 @RequestMapping("/auth/v1")
 @AllArgsConstructor
 public class AuthenticationController {
-
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(AuthenticationController.class);
 
     private MyUserDetailsService myUserDetailsService;
     private JwtUtil jwtUtil;
@@ -40,7 +43,7 @@ public class AuthenticationController {
      * @throws Exception
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest jwtRequest) {
+    public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest jwtRequest) throws AuthServiceException {
         String methodName = "AuthenticationController#generateToken";
         log.info("inside the " + methodName);
         try {
@@ -49,7 +52,10 @@ public class AuthenticationController {
                             (jwtRequest.getUsername(), jwtRequest.getPassword()));
         } catch (UsernameNotFoundException e) {
             log.error("Exception occurred in " + methodName + "Exception= " + e.getStackTrace());
-            throw new UsernameNotFoundException("Bad Credentials..!!");
+            throw new AuthServiceException(ErrorCode.USER_NAME_NOT_FOUND_EXCEPTION);
+        } catch (BadCredentialsException e) {
+            log.error("Exception occurred in " + methodName + "Exception= " + e.getStackTrace());
+            throw new AuthServiceException(ErrorCode.INVALID_USER_CREDENTIAL);
         }
         UserDetails userDetails = myUserDetailsService.loadUserByUsername(jwtRequest.getUsername());
         String token = jwtUtil.generateToken(userDetails);
