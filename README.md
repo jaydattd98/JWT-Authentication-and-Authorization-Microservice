@@ -30,11 +30,11 @@ Swagger UI Access Point :
 
 Database Access points :
 
-       Jwt Application Tables : http://localhost:8080/h2-console/
+       Jwt Application Tables : http://localhost:8181/h2-console/
 
 Local accces point for Backend ;
 
-       Authorization Microservice: http://localhost:8080/
+       Authorization Microservice: http://localhost:8181/
 
 Login Credentials:
 
@@ -52,7 +52,7 @@ APIS ;-
        Use to add new Users :-
               Method : POST
 
-              URL: http://localhost:8989/auth/v1/create
+              URL: http://localhost:8181/auth/v1/create
 
               header :- token not need to send.
 
@@ -75,7 +75,7 @@ APIS ;-
 
              Method : POST
 
-             ULR: http://localhost:8080/auth/v1/login
+             ULR: http://localhost:8181/auth/v1/login
 
              header :- token not need to send.
 
@@ -93,7 +93,7 @@ APIS ;-
 
              Method : GET
 
-             ULR: http://localhost:8080/auth/v1/isTokenValid
+             ULR: http://localhost:8181/auth/v1/isTokenValid
 
              Request : not needed
 
